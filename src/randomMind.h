@@ -19,6 +19,7 @@ const char* const mindList[] PROGMEM = {mind0, mind0, mind0, mind1, mind12,
                                        };
 
 long idleTimer;
+int randomInterval = 1000;
 void allRandom() {
 
   char tokenSet[] = {T_INDEXED_SIMULTANEOUS_BIN, T_MOVE_BIN};
@@ -41,7 +42,7 @@ void allRandom() {
 void randomMind() {
   byte randomMindListLength = sizeof(mindList) / 2;
   int randomChoice = random() % (randomMindListLength * EVERY_X_SECONDS); //on average every EVERY_X_SECONDS seconds
-  if (millis() - idleTimer > 1000) {//every second throw a dice
+  if (millis() - idleTimer > randomInterval) {//every second throw a dice
     idleTimer = millis();
     if (randomChoice < randomMindListLength) {
       if (randomChoice < 3) {
